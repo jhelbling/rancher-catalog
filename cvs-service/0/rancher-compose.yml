@@ -1,0 +1,76 @@
+.catalog
+  name: cvs-service
+  version: 0.0.1beta
+  description: First try
+  uuid: cvs-service-0
+  questions:
+    - variable: cvsversion
+      label: CVS container version
+      description: The CVS container tag used in the service
+      default: latest
+      required: true
+      type: string
+    - variable: cvsscale
+      label: CVS initial scale
+      description: Deploy how many CVS containers initially
+      default: 1
+      required: true
+      type: int
+    - variable: rsasversion
+      label: RSAS container version
+      description: The RSAS container tag used in the service
+      default: latest
+      required: true
+      type: string
+    - variable: rsasscale
+      label: RSAS initial scale
+      description: Deploy how many RSAS containers initially
+      default: 1
+      required: true
+      type: int
+    - variable: connectionport
+      label: Connection port
+      description: The port under which the service is available on the designated entry host
+      required: true
+      type: int
+
+cvs:
+  scale: ${cvsscale}
+  health_check:
+    port: 8090
+    interval: 2000
+    unhealthy_threshold: 2
+    healthy_threshold: 3
+    response_timeout: 2000
+
+rsas:
+  scale: ${rsasscale}
+  health_check:
+    port: 1194
+    interval: 2000
+    unhealthy_threshold: 2
+    request_line: GET / HTTP/1.0
+    healthy_threshold: 3
+    response_timeout: 2000
+
+cvs-balancer:
+  scale: 2
+  load_balancer_config:
+    haproxy_config: {}
+  health_check:
+    port: 42
+    interval: 2000
+    unhealthy_threshold: 3
+    healthy_threshold: 2
+    response_timeout: 2000
+
+entry-balancer:
+  scale: 1
+  load_balancer_config:
+    haproxy_config: {}
+  health_check:
+    port: 42
+    interval: 2000
+    unhealthy_threshold: 3
+    healthy_threshold: 2
+    response_timeout: 2000

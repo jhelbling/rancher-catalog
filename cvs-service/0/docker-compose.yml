@@ -1,0 +1,42 @@
+entry-balancer:
+  expose:
+    - 80:1194
+  image: rancher/load-balancer-service
+  links:
+    - rsas:rsas
+  labels:
+    io.rancher.scheduler.affinity:host_label: test-host=true
+  tty: true
+  stdin_open: true
+
+rsas:
+  image: hub.cognotekt.int:5000/production/production:${cvsversion}
+  ports:
+    - "${connectionport}:1194"
+  links:
+    - cvs-balancer:cvs
+  environment:
+    CVS_HOST: cvs-balancer
+    CVS_PORT: '80'
+  labels:
+    io.rancher.container.pull_image: always
+  tty: true
+  stdin_open: true
+
+cvs-balancer:
+  expose:
+    - 80:8090/tcp
+  tty: true
+  image: rancher/load-balancer-service
+  stdin_open: true
+  links:
+  - cvs:cvs
+
+cvs:
+  image: hub.cognotekt.int:5000/production/rsas:${rsasversion}
+  expose:
+    - "8090:8090"
+  labels:
+    io.rancher.container.pull_image: always
+  tty: true
+  stdin_open: true

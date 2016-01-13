@@ -1,0 +1,5 @@
+name: CVS-RSAS combination
+description: |
+  Using CVS and RSAS to create an endpoint
+version: 0
+category: Cognotekt
