@@ -1,5 +1,6 @@
-name: CVS-RSAS combination
+name: CVS-RSAS
 description: |
-  Using CVS and RSAS to create an endpoint
+  Create a Rancher-internal CVS-RSAS service structure. Use the entry-balancer
+  stack to receive traffic from outside Rancher.
 version: "0.0.1"
 category: Cognotekt
