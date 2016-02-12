@@ -54,6 +54,20 @@
       required: true
       type: int
 
+    - variable: entry_port
+      label: Entrypoint port
+      description: Which port to use for the entry point
+      default: 21194
+      required: true
+      type: int
+
+    - variable: entry_scale
+      label: Activate entry point
+      description: Set to 0 for disabling entry point (default)
+      default: 0
+      required: true
+      type: int
+
 cvs:
   scale: ${cvsscale}
   health_check:
@@ -75,6 +89,17 @@ rsas:
 
 cvs-balancer:
   scale: 2
+  load_balancer_config:
+    haproxy_config: {}
+  health_check:
+    port: 42
+    interval: 2000
+    unhealthy_threshold: 3
+    healthy_threshold: 2
+    response_timeout: 2000
+
+optional-entry:
+  scale: ${entry_scale}
   load_balancer_config:
     haproxy_config: {}
   health_check:
