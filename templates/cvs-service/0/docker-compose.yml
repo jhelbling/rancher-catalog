@@ -6,7 +6,7 @@ rsas:
     CVS_HOST: cvs-balancer
     CVS_PORT: '8080'
     RSAS_CONSUL_ENABLE: 'yes'
-    RSAS_METRIC_LABELS: service=${stack_name},${metric_labels}
+    RSAS_METRIC_LABELS: id=${service_id},${metric_labels}
   labels:
     io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
     io.rancher.container.pull_image: always

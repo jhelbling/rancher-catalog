@@ -27,6 +27,12 @@
       required: false
       type: service
 
+    - variable: service_id
+      label: Service ID
+      description: Unique ID for all services for one customer
+      type: string
+      required: true
+
     - variable: metric_labels
       label: Metric labels
       description: Additional labels for metrics, format "A=B,C=D", no spaces
