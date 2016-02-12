@@ -30,8 +30,11 @@ cvs:
     io.rancher.container.pull_image: always
 
 optional-entry:
-  expose:
+  ports:
     - "${entry_port}:1194/tcp"
   image: rancher/load-balancer-service
   links:
     - "rsas:rsas"
+  labels:
+    io.rancher.scheduler.affinity:host_label: ${entry_hostlabel}=true
+    io.rancher.scheduler.global: 'true'

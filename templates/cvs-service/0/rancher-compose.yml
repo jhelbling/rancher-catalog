@@ -68,6 +68,14 @@
       required: false
       default: ""
 
+    - variable: entry_hostlabel
+      label: Host label (hard requirement) on which to place balancers
+      description: |
+        Balancers are only spawned on Rancher hosts which have set LABEL=true
+      default: webtraffic
+      required: true
+      type: string
+
 cvs:
   scale: ${cvsscale}
   health_check:
