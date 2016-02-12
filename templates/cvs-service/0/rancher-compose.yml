@@ -1,6 +1,6 @@
-.catalog
+.catalog:
   name: cvs-service
-  version: 0.0.1beta
+  version: "0.0.1"
   description: First try
   uuid: cvs-service-0
   questions:
