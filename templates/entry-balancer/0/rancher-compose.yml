@@ -17,24 +17,31 @@
     - variable: balance_port
       label: Target port
       description: Balance on this port on the target service
+      default: 8080
       required: true
       type: int
 
-    - variable: target_service
-      label: Choose service to balance traffic into
-      description: The target service for balancing traffic to
+    - variable: target_service_red
+      label: Red service
+      description: "Red" target service
+      required: true
+      type: service
+
+    - variable: target_service_green
+      label: Green service
+      description: "Green" target service
       required: true
       type: service
 
     - variable: entry_label
       label: Host label (hard requirement) on which to place balancers
-      description: Balancers are only spawned on Rancher hosts with this label
+      description: |
+        Balancers are only spawned on Rancher hosts which have set $LABEL=true
       default: webtraffic
       required: true
       type: string
 
 entry-balancer:
-  scale: 1
   load_balancer_config:
     haproxy_config: {}
   health_check:

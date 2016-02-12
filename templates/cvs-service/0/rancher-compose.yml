@@ -7,33 +7,42 @@
   uuid: cvs-service-0
   questions:
 
-    - variable: rsas_image_base
-      label: RSAS container name
-      description: Base container image name for RSAS, without tag!
-      default: hub.cognotekt.int:5000/production/rsas
-      required: true
-      type: string
-
-    - variable: cvs_image_base
-      label: CVS container name
-      description: Base container image name for RSAS, without tag!
-      default: hub.cognotekt.int:5000/production/production
-      required: true
-      type: string
-
-    - variable: rsas_image_tag
-      label: RSAS container tag
+    - variable: rsas_image
+      label: RSAS container
       description: Base container image tag for RSAS
-      default: latest
+      default: hub.cognotekt.int:5000/production/rsas:latest
       required: true
       type: string
 
-    - variable: cvs_image_tag
-      label: CVS container tag
-      description: Base container image tag for RSAS
-      default: latest
+    - variable: cvs_image
+      label: CVS container
+      description: Base container image for RSAS
+      default: hub.cognotekt.int:5000/production/production:latest
       required: true
       type: string
+
+    - variable: consul_service
+      label: Consul service instance
+      description: RSAS can register on consul for monitoring.
+      required: false
+      type: service
+
+    - variable: metric_labels
+      label: Metric labels
+      description: Additional labels for metrics, format "A=B,C=D", no spaces
+      type: string
+      required: false
+      default: ""
+
+    - variable: rsas_consul_enable
+      label: Enable consul
+      description: Whether to use consul for service discovery
+      required: true
+      default: "yes"
+      type: enum
+      options:
+        - "yes"
+        - "no"
 
     - variable: rsasscale
       label: RSAS initial scale
@@ -45,24 +54,9 @@
     - variable: cvsscale
       label: CVS initial scale
       description: Deploy how many CVS containers initially
-      default: 1
+      default: 2
       required: true
       type: int
-
-    - variable: consul_service
-      label: Consul service instance
-      description: RSAS can register on consul for monitoring.
-      required: false
-      type: service
-
-    - variable: rsas_consul_enable
-      label: Enable consul
-      description: Whether to use consul for service discovery
-      required: true
-      type: enum
-      options:
-        - "yes"
-        - "no"
 
 cvs:
   scale: ${cvsscale}

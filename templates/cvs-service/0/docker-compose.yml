@@ -1,12 +1,12 @@
 rsas:
-  image: ${rsas_image_base}:${rsas_image_tag}
+  image: ${rsas_image}
   expose:
-  - "8080:1194/tcp"
+  - "1194:1194/tcp"
   environment:
     CVS_HOST: cvs-balancer
     CVS_PORT: '8080'
     RSAS_CONSUL_ENABLE: '${rsas_consul_enable}'
-    RSAS_METRIC_LABELS: service=$${stack_name}
+    RSAS_METRIC_LABELS: service=$${stack_name},${metric_labels}
   labels:
     io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
     io.rancher.container.pull_image: always
@@ -22,7 +22,7 @@ cvs-balancer:
     - cvs:cvs
 
 cvs:
-  image: ${cvs_image_base}:${cvs_image_tag}
+  image: ${cvs_image}
   expose:
     - "8090:8090"
   labels:

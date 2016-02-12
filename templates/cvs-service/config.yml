@@ -1,6 +1,6 @@
 name: CVS-RSAS
 description: |
-  Create a Rancher-internal CVS-RSAS service structure. Use the entry-balancer
-  stack to receive traffic from outside Rancher.
+  Create a Rancher-internal CVS-RSAS service structure. Needs additional load
+  balancer for receiving external traffic.
 version: "0.0.1"
 category: Cognotekt
