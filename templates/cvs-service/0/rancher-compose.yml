@@ -49,6 +49,21 @@
       required: true
       type: int
 
+    - variable: consul_service
+      label: Consul service instance
+      description: RSAS can register on consul for monitoring.
+      required: false
+      type: service
+
+    - variable: rsas_consul_enable
+      label: Enable consul
+      description: Whether to use consul for service discovery
+      required: true
+      type: enum
+      options:
+        - "yes"
+        - "no"
+
 cvs:
   scale: ${cvsscale}
   health_check:
