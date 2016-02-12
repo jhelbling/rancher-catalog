@@ -34,16 +34,6 @@
       required: false
       default: ""
 
-    - variable: rsas_consul_enable
-      label: Enable consul
-      description: Whether to use consul for service discovery
-      required: true
-      default: "yes"
-      type: enum
-      options:
-        - "yes"
-        - "no"
-
     - variable: rsasscale
       label: RSAS initial scale
       description: Deploy how many RSAS containers initially
