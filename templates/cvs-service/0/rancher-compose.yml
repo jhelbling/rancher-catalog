@@ -1,36 +1,65 @@
 .catalog:
   name: cvs-service
   version: "0.0.1"
-  description: First try
+  description: |
+    Creates a CVS-RSAS combination with two loadbalancing layers (one in front,
+    one between CVS and RSAS).
   uuid: cvs-service-0
   questions:
-    - variable: cvsversion
-      label: CVS container version
-      description: The CVS container tag used in the service
-      default: latest
-      required: true
+
+    - variable: entry_label
+      label: Load balancer hsot label
+      description: On a host with this label the load balancer ports are opened
+      default: webtraffic
+      required: false
       type: string
-    - variable: cvsscale
-      label: CVS initial scale
-      description: Deploy how many CVS containers initially
-      default: 1
+
+    - variable: incoming_port
+      label: Port for traffic
+      description: This port is opened on the Rancher host for incoming traffic
+      default: 8080
       required: true
       type: int
-    - variable: rsasversion
-      label: RSAS container version
-      description: The RSAS container tag used in the service
+
+    - variable: rsas_image_base
+      label: RSAS container name
+      description: Base container image name for RSAS, without tag!
+      default: hub.cognotekt.int:5000/production/rsas
+      required: true
+      type: string
+
+    - variable: cvs_image_base
+      label: CVS container name
+      description: Base container image name for RSAS, without tag!
+      default: hub.cognotekt.int:5000/production/production
+      required: true
+      type: string
+
+    - variable: rsas_image_tag
+      label: RSAS container tag
+      description: Base container image tag for RSAS
       default: latest
       required: true
       type: string
+
+    - variable: cvs_image_tag
+      label: CVS container tag
+      description: Base container image tag for RSAS
+      default: latest
+      required: true
+      type: string
+
     - variable: rsasscale
       label: RSAS initial scale
       description: Deploy how many RSAS containers initially
       default: 1
       required: true
       type: int
-    - variable: connectionport
-      label: Connection port
-      description: The port under which the service is available on the designated entry host
+
+    - variable: cvsscale
+      label: CVS initial scale
+      description: Deploy how many CVS containers initially
+      default: 1
       required: true
       type: int
 
@@ -41,7 +70,7 @@ cvs:
     interval: 2000
     unhealthy_threshold: 2
     healthy_threshold: 3
-    response_timeout: 2000
+    response_timeout: 1000
 
 rsas:
   scale: ${rsasscale}
@@ -49,9 +78,9 @@ rsas:
     port: 1194
     interval: 2000
     unhealthy_threshold: 2
-    request_line: GET / HTTP/1.0
+    request_line: GET /health HTTP/1.0
     healthy_threshold: 3
-    response_timeout: 2000
+    response_timeout: 1000
 
 cvs-balancer:
   scale: 2
