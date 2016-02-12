@@ -1,0 +1,5 @@
+name: Entry balancer for services
+description: |
+  A generic load balancer service for rancher-internal services
+version: "0.0.1"
+category: Cognotekt

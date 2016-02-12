@@ -7,20 +7,6 @@
   uuid: cvs-service-0
   questions:
 
-    - variable: entry_label
-      label: Load balancer hsot label
-      description: On a host with this label the load balancer ports are opened
-      default: webtraffic
-      required: false
-      type: string
-
-    - variable: incoming_port
-      label: Port for traffic
-      description: This port is opened on the Rancher host for incoming traffic
-      default: 8080
-      required: true
-      type: int
-
     - variable: rsas_image_base
       label: RSAS container name
       description: Base container image name for RSAS, without tag!
@@ -84,17 +70,6 @@ rsas:
 
 cvs-balancer:
   scale: 2
-  load_balancer_config:
-    haproxy_config: {}
-  health_check:
-    port: 42
-    interval: 2000
-    unhealthy_threshold: 3
-    healthy_threshold: 2
-    response_timeout: 2000
-
-entry-balancer:
-  scale: 1
   load_balancer_config:
     haproxy_config: {}
   health_check:
