@@ -16,7 +16,7 @@
 
     - variable: cvs_image
       label: CVS container
-      description: Base container image for RSAS
+      description: Base container image for CVS
       default: hub.cognotekt.int:5000/production/production:latest
       required: true
       type: string
@@ -32,13 +32,6 @@
       description: Unique ID for all services for one customer
       type: string
       required: true
-
-    - variable: metric_labels
-      label: Metric labels
-      description: Additional labels for metrics, format "A=B,C=D", no spaces
-      type: string
-      required: false
-      default: ""
 
     - variable: rsasscale
       label: RSAS initial scale
@@ -67,6 +60,13 @@
       default: 0
       required: true
       type: int
+
+    - variable: metric_labels
+      label: Metric labels
+      description: Additional labels for metrics, format "A=B,C=D", no spaces
+      type: string
+      required: false
+      default: ""
 
 cvs:
   scale: ${cvsscale}
