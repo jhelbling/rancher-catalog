@@ -1,7 +1,7 @@
 rsas:
   image: ${rsas_image}
   expose:
-  - "1194:1194/tcp"
+  - "1194"
   environment:
     CVS_HOST: cvs-balancer
     CVS_PORT: '8080'
@@ -16,7 +16,7 @@ rsas:
 
 cvs-balancer:
   expose:
-    - 8080:8090/tcp
+    - "8080:8090/tcp"
   image: rancher/load-balancer-service
   links:
     - cvs:cvs
@@ -24,7 +24,7 @@ cvs-balancer:
 cvs:
   image: ${cvs_image}
   expose:
-    - "8090:8090"
+    - "8090"
   labels:
     io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
     io.rancher.container.pull_image: always
