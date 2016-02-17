@@ -2,8 +2,8 @@
   name: cvs-service
   version: "0.0.1"
   description: |
-    Creates a CVS-RSAS combination with two loadbalancing layers (one in front,
-    one between CVS and RSAS).
+    Creates a CVS-RSAS combination with two loadbalancing layers. The outer
+    loadbalancer *needs* a host label of "webtraffic=true"
   uuid: cvs-service-0
   questions:
 
@@ -21,12 +21,6 @@
       required: true
       type: string
 
-    - variable: consul_service
-      label: Consul service instance
-      description: RSAS can register on consul for monitoring.
-      required: false
-      type: service
-
     - variable: service_id
       label: Service ID
       description: Unique ID for all services for one customer
@@ -40,13 +34,6 @@
       required: true
       type: int
 
-    - variable: cvsscale
-      label: CVS initial scale
-      description: Deploy how many CVS containers initially
-      default: 2
-      required: true
-      type: int
-
     - variable: entry_port
       label: Entrypoint port
       description: Which port to use for the entry point
@@ -54,10 +41,10 @@
       required: true
       type: int
 
-    - variable: entry_scale
-      label: Activate entry point
-      description: Set to 0 for disabling entry point (default)
-      default: 0
+    - variable: cvsscale
+      label: CVS initial scale
+      description: Deploy how many CVS containers initially
+      default: 2
       required: true
       type: int
 
@@ -68,20 +55,13 @@
       required: false
       default: ""
 
-    - variable: entry_hostlabel
-      label: Host label (hard requirement) on which to place balancers
-      description: |
-        Balancers are only spawned on Rancher hosts which have set LABEL=true
-      default: webtraffic
-      required: true
-      type: string
-
 cvs:
   scale: ${cvsscale}
   health_check:
     port: 8090
     interval: 2000
     unhealthy_threshold: 2
+    request_line: GET /health HTTP/1.0
     healthy_threshold: 3
     response_timeout: 1000
 
@@ -107,7 +87,6 @@ cvs-balancer:
     response_timeout: 2000
 
 optional-entry:
-  scale: ${entry_scale}
   load_balancer_config:
     haproxy_config: {}
   health_check:
