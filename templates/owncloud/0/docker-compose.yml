@@ -1,0 +1,21 @@
+owncloud:
+  image: owncloud
+  # ports:
+  #   - "${incoming_port}:80"
+  volumes_from:
+    - owncloud-data
+  links:
+    - owncloud-db:db
+  labels:
+    io.rancher.sidekicks: owncloud-data
+    auto_balanced: ${auto_balanced_label}
+
+owncloud-db:
+  image: rancher/external-service
+
+owncloud-data:
+  image: busybox
+  labels:
+    io.rancher.container.start_once: "true"
+  volumes:
+    - /var/www/html
