@@ -1,21 +1,24 @@
+owncloud-entry:
+  ports:
+  - 443:80
+  labels:
+    io.rancher.loadbalancer.ssl.ports: '443'
+    io.rancher.loadbalancer.target.owncloud: '80'
+    io.rancher.scheduler.affinity:host_label: owncloud=true
+  image: rancher/load-balancer-service
+  links:
+    - owncloud:owncloud
+
 owncloud:
   image: owncloud
-  # ports:
-  #   - "${incoming_port}:80"
-  volumes_from:
-    - owncloud-data
+  expose:
+    - "80"
+  volumes:
+    - /srv/owncloud:/var/www/html
   links:
     - owncloud-db:db
   labels:
-    io.rancher.sidekicks: owncloud-data
-    auto_balanced: ${auto_balanced_label}
+    io.rancher.scheduler.affinity:host_label: owncloud=true
 
 owncloud-db:
   image: rancher/external-service
-
-owncloud-data:
-  image: busybox
-  labels:
-    io.rancher.container.start_once: "true"
-  volumes:
-    - /var/www/html

@@ -15,16 +15,18 @@
 
 owncloud:
   scale: 1
-  health_check:
-    port: 80
-    interval: 5000
-    request_line: GET / HTTP/1.0
-    unhealthy_threshold: 4
-    healthy_threshold: 4
-    response_timeout: 4000
 
 owncloud-db:
   hostname: ${database_host}
 
-owncloud-data:
+owncloud-entry:
   scale: 1
+  load_balancer_config:
+    haproxy_config: {}
+  default_cert: com.cognotekt-services.owncloud
+  health_check:
+    port: 42
+    interval: 2000
+    unhealthy_threshold: 3
+    healthy_threshold: 2
+    response_timeout: 2000
