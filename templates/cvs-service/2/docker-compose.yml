@@ -17,6 +17,7 @@ rsas:
 
 rsas-client:
   image: ${rsas_client_image}
+  command: --https
   expose:
     - "5000"
   environment:
