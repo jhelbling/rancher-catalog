@@ -40,10 +40,22 @@
       required: true
       type: string
 
+    - variable: config_db_connection
+      label: database host
+      default: configtoolcvs@pg.cognotekt.int/configurationdatabase
+      required: true
+      type: string
+
     - variable: service_id
       label: Service ID
       description: Unique ID for all services for one customer
       type: string
+      required: true
+
+    - variable: config_db_password
+      label: database password
+      description: grants access to DB of ConfigTool
+      type: password
       required: true
 
     - variable: rsasscale

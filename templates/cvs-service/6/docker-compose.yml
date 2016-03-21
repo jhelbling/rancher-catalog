@@ -35,6 +35,19 @@ rsas-client:
     - "cvs-balancer:cvs-balancer"
     - "rsas:rsas"
 
+cfgtool:
+  image: $(cfgtool_image)
+  expose:
+    - "8000"
+  environment:
+    DB_CONNECTION: ${config_db_connection}
+    DB_PASSWORD: ${config_db_password}
+    DEBUG: false
+  labels:
+    io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+    io.rancher.container.pull_image: always
+    io.rancher.container.hostname_override: container_name
+
 cvs-balancer:
   expose:
     - "8080:8090/tcp"
