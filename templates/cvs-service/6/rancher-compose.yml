@@ -41,7 +41,8 @@
       type: string
 
     - variable: config_db_connection
-      label: database host
+      label: Database connection string
+      description: Format: user@host/dbname
       default: configtoolcvs@pg.cognotekt.int/configurationdatabase
       required: true
       type: string
@@ -53,8 +54,8 @@
       required: true
 
     - variable: config_db_password
-      label: database password
-      description: grants access to DB of ConfigTool
+      label: Database password
+      description: Grants access to DB of ConfigTool
       type: password
       required: true
 
