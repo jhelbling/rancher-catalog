@@ -83,6 +83,7 @@ entry:
     - "rsas-client:rsas-client"
     - "cvs:cvs"
     - "rsas:rsas"
+    - "cfgtool:cfgtool"
   labels:
     io.rancher.scheduler.affinity:host_label: webtraffic=true
     io.rancher.scheduler.global: 'true'
