@@ -42,7 +42,7 @@
 
     - variable: config_db_connection
       label: Database connection string
-      description: Format: user@host/dbname
+      description: 'Format: user@host/dbname'
       default: configtoolcvs@pg.cognotekt.int/configurationdatacvs
       required: true
       type: string
