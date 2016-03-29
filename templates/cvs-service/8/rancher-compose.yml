@@ -17,7 +17,7 @@
     - variable: cvs_image
       label: CVS container
       description: Base container image for CVS
-      default: hub.cognotekt.int:5000/production/production:latest
+      default: hub.cognotekt.int:5000/production/cvs:latest
       required: true
       type: string
 
