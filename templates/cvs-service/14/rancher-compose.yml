@@ -1,10 +1,10 @@
 .catalog:
   name: cvs-service
-  version: "0.8.0"
+  version: "0.9.0"
   description: |
     Creates a CVS-RSAS combination with two loadbalancing layers. The outer
     loadbalancer *needs* a host label of "webtraffic=true"
-  uuid: cvs-service-6
+  uuid: cvs-service-090
   questions:
 
     - variable: routing
