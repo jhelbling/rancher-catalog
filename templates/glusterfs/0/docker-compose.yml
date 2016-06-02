@@ -38,8 +38,8 @@ glusterfs-data:
   command: /bin/true
   net: none
   volumes:
-    - /var/run
-    - /var/lib/glusterd
+    - /srv/rancher-gluster/var_run:/var/run
+    - /srv/rancher-gluster/var_lib_glusterd:/var/lib/glusterd
   labels:
     io.rancher.container.hostname_override: container_name
     io.rancher.container.start_once: true
