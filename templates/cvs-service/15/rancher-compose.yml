@@ -8,7 +8,7 @@
 
     - variable: service_url
       label: URL for service
-      description: "Enter only the top part (e.g. without 'cogno.int' or 'cognotekt.cloud')"
+      description: "Do not enter the TLD, AND USE TWO DASHES INSTEAD OF A DOT!!"
       required: true
       type: string
 
