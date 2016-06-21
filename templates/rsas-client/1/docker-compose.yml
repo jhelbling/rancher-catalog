@@ -1,0 +1,14 @@
+rsas-client:
+  image: ${rsas_client_image}
+  command: --flask-proxy-fix 2 --rsas-host ${rsas_host}
+  ports:
+    - "1234"
+  environment:
+    RSAS_HOST:  rsas
+    RSAS_PORT:  '1194'
+  labels:
+    rancon.name: ${service_url}
+    rancon.tag: ${service_type}
+    io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+    io.rancher.container.pull_image: always
+    io.rancher.container.hostname_override: container_name
