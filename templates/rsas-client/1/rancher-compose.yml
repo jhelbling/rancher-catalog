@@ -27,7 +27,7 @@
       required: true
       type: string
 
-    - variable: "rsas_host"
+    - variable: rsas_host
       label: "RSAS URL"
       required: true
       description: "The host running the RSAS service to use"
