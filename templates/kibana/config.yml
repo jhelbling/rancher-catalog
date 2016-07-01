@@ -1,0 +1,6 @@
+name: Kibana
+description: |
+  Installs a kibana instance and publishes it under a the same name in
+  the load balander.
+version: "0.0.1"
+category: Cognotekt

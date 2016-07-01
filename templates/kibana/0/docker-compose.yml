@@ -1,0 +1,10 @@
+kibana:
+  image: kibana
+  ports:
+    - 5601
+  environment:
+    ELASTICSEARCH_URL: http://elastic
+  labels:
+    rancon.tags: webui
+  links:
+    - ${elastic_instance}:elastic

@@ -1,0 +1,11 @@
+.catalog:
+  name: kibana-cognotekt
+  version: "0.0.1"
+  description: |
+    Installs Kibana and points to an elasticsearch instance.
+  questions:
+
+    - variable: elastic_service
+      label: Elasticsearch service to use
+      required: true
+      type: service
