@@ -1,0 +1,48 @@
+rsas:
+  image: ${rsas_image}
+  ports:
+  - "1194"
+  environment:
+    CONSUL: consul.cognotekt.int
+    PROM_PUSHGATEWAY: consul:prom-pushgateway
+    RSAS_SERVICE_ID: ${service_url}
+    CVS_HOST: cvs-balancer
+    CVS_PORT: '8080'
+  labels:
+    rancon.name: ${service_url}
+    rancon.tag: ${service_type}
+    io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+    io.rancher.container.pull_image: always
+    io.rancher.container.hostname_override: container_name
+  links:
+  - "cvs-balancer:cvs-balancer"
+
+
+cvs-balancer:
+  expose:
+    - "8080:8090/tcp"
+  image: rancher/load-balancer-service
+  links:
+    - cvs:cvs
+
+
+cvs:
+  image: ${cvs_image}
+  command: config/cvsConfig.json -r ${log_destination_host} -q ${log_destination_port}
+  volumes_from:
+    - cvs-config
+  expose:
+    - "8090"
+  labels:
+    io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+    io.rancher.container.pull_image: always
+    io.rancher.container.hostname_override: container_name
+    io.rancher.sidekicks: cvs-config
+
+
+cvs-config:
+  image: ${cvs_config_image}
+  net: "none"
+  labels:
+    io.rancher.container.start_once: "true"
+    io.rancher.container.pull_image: always

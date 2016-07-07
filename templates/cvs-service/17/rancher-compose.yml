@@ -1,0 +1,96 @@
+.catalog:
+  name: cvs-service
+  version: "1.0.2"
+  description: |
+    Creates a CVS-RSAS combination and tags it for the load balancer. Relies on
+    a running cousul-router-based infrastructure to be picked up.
+  questions:
+
+    - variable: service_url
+      label: URL for service
+      description: "Do not enter the TLD, AND USE TWO DASHES INSTEAD OF A DOT!!"
+      required: true
+      type: string
+
+    - variable: service_type
+      label: Visibility
+      description: "Choose 'webui_external' for reachability from 'outside'"
+      type: enum
+      options:
+        - webui
+        - webui_external
+      required: true
+
+    - variable: rsas_image
+      label: RSAS container
+      description: Base container image tag for RSAS
+      default: hub.cognotekt.int:5000/production/rsas:latest
+      required: true
+      type: string
+
+    - variable: cvs_image
+      label: CVS container
+      description: Base container image for CVS
+      default: hub.cognotekt.int:5000/production/cvs:latest
+      required: true
+      type: string
+
+    - variable: cvs_config_image
+      label: CVS configuration container
+      description: Select CVS configuration
+      default: hub.cognotekt.int:5000/production/config:latest
+      required: true
+      type: string
+
+    - variable: rsas_client_proxy_fix
+      label: Number of proxies in front of RSAS client
+      description: "Just don't change it unless you know what you're doing. (Tip: You don't)"
+      default: 2
+      required: true
+      type: int
+
+    - variable: log_destination_host
+      label: Send logs to this host
+      description: TCP connection sending strings ending with newline
+      default: health.logstash.service.consul
+      required: true
+      type: string
+
+    - variable: log_destination_port
+      label: Try to connect this port for log sending
+      description: The port to connect to
+      default: 8901
+      required: true
+      type: int
+
+
+cvs:
+  scale: 4
+  health_check:
+    port: 8091
+    interval: 5500
+    unhealthy_threshold: 2
+    request_line: GET /health HTTP/1.0
+    healthy_threshold: 3
+    response_timeout: 10000
+
+rsas:
+  scale: 2
+  health_check:
+    port: 1194
+    interval: 5000
+    unhealthy_threshold: 2
+    request_line: GET /health HTTP/1.0
+    healthy_threshold: 3
+    response_timeout: 5000
+
+cvs-balancer:
+  scale: 2
+  load_balancer_config:
+    haproxy_config: {}
+  health_check:
+    port: 42
+    interval: 5000
+    unhealthy_threshold: 3
+    healthy_threshold: 2
+    response_timeout: 2000
