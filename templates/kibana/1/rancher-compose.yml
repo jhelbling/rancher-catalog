@@ -1,0 +1,21 @@
+.catalog:
+  name: kibana-cognotekt
+  version: "0.0.2"
+  description: |
+    Installs Kibana and points to an elasticsearch instance.
+  questions:
+
+    - variable: elastic_service
+      label: Elasticsearch service to use
+      required: true
+      type: service
+
+    - variable: visibility
+      label: Visibility
+      description: "Choose 'webui_external' for reachability from 'outside'"
+      type: enum
+      default: webui
+      options:
+        - webui
+        - webui_external
+      required: true

@@ -1,0 +1,12 @@
+kibana:
+  image: kibana
+  ports:
+    - 5601
+  environment:
+    ELASTICSEARCH_URL: http://elastic:9200
+  labels:
+    rancon.tag: ${visibility}
+    # really. don't put more than ONE service in here.
+    rancon.name: '%STACK%'
+  links:
+    - ${elastic_instance}:elastic
