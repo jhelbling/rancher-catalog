@@ -9,4 +9,4 @@ kibana:
     # really. don't put more than ONE service in here.
     rancon.name: '%STACK%'
   links:
-    - ${elastic_instance}:elastic
+    - ${elastic_service}:elastic
