@@ -1,5 +1,4 @@
-webapppython:
-  scale: 1
+
 
 .catalog:
   name: flask-webapp-tool
