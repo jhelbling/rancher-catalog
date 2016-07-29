@@ -11,6 +11,15 @@
       required: true
       type: string
 
+    - variable: service_type
+      label: Visibility
+      description: "Choose 'webui_external' for reachability from 'outside'"
+      type: enum
+      options:
+        - webui
+        - webui_external
+      required: true
+
 
 webapppython:
   scale: 1

@@ -4,7 +4,11 @@ webapppython:
   dns_search:
   - localhost:5000
   labels:
+    rancon.name: ${service_url}
+    rancon.tag: ${service_type}
     io.rancher.container.pull_image: always
+    io.rancher.container.hostname_override: container_name
+
   tty: true
   image: hub.cognotekt.int:5000/test/webapp-pruthvi:latest
   stdin_open: true
