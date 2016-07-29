@@ -1,2 +1,16 @@
 webapppython:
   scale: 1
+
+.catalog:
+  name: flask-webapp-tool
+  version: "1.0.0"
+  description: |
+    Deploys a python flask web app.
+
+questions:
+
+    - variable: service_url
+      label: URL for service
+      description: "Do not enter the TLD, AND USE TWO DASHES INSTEAD OF A DOT!!"
+      required: true
+      type: string
