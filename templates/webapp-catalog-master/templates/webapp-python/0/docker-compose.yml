@@ -5,7 +5,6 @@ webapppython:
   - localhost:5000
   labels:
     io.rancher.container.pull_image: always
-    io.rancher.container.requested_ip: 10.42.0.8
   tty: true
   image: hub.cognotekt.int:5000/test/webapp-pruthvi:latest
   stdin_open: true
