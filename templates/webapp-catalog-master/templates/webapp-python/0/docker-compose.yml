@@ -1,0 +1,6 @@
+myapp:
+  labels:
+    io.rancher.container.pull_image: always
+  tty: true
+  image: hub.cognotekt.int:5000/test/webapp-pruthvi:latest
+  stdin_open: true
