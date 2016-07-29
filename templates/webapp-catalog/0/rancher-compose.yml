@@ -1,3 +1,6 @@
+webapppython:
+  scale: 1
+
 .catalog:
   name: flask-webapp-tool
   version: "1.0.0"
