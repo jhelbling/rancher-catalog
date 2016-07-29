@@ -11,3 +11,7 @@
       description: "Do not enter the TLD, AND USE TWO DASHES INSTEAD OF A DOT!!"
       required: true
       type: string
+
+
+webapppython:
+    scale: 1

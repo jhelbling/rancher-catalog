@@ -6,7 +6,6 @@ webapppython:
   labels:
     io.rancher.container.pull_image: always
     rancon.name: ${service_url}
-    rancon.tag: ${service_type}
     tty: true
     image: hub.cognotekt.int:5000/test/webapp-pruthvi:latest
     stdin_open: true
