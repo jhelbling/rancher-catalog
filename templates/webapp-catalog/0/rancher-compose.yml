@@ -1,12 +1,9 @@
-webapppython:
-  scale: 1
-
 .catalog:
   name: flask-webapp-tool
   version: "1.0.0"
   description: |
     Deploys a python flask web app.
-
+  scale:1
   questions:
 
     - variable: service_url
