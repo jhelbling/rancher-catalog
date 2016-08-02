@@ -1,0 +1,25 @@
+.catalog:
+  name: Pypi-Repository
+  version: "1.0.0"
+  description: |
+    Deploys a Pypi Cloud Repository.
+  questions:
+
+    - variable: service_url
+      label: URL for service
+      description: "Do not enter the TLD, AND USE TWO DASHES INSTEAD OF A DOT!!"
+      required: true
+      type: string
+
+    - variable: service_type
+      label: Visibility
+      description: "Choose 'webui_external' for reachability from 'outside'"
+      type: enum
+      options:
+        - webui
+        - webui_external
+      required: true
+
+
+My-Py-repo:
+  scale: 1
