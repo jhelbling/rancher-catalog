@@ -1,8 +1,10 @@
 My-Py-repo:
-  ports:
-  - 65346:8080/tcp
-  dns_search:
-  - localhost:65346
+  
+  environment:
+    AWS_DEFAULT_REGION: eu-central-1
+    AWS_ACCESS_KEY_ID: ${aws_access_key}
+    AWS_SECRET_ACCESS_KEY: ${aws_secret_key}
+    DISP_BUCKET: ${s3_bucket}
   labels:
     rancon.name: ${service_url}
     rancon.tag: ${service_type}

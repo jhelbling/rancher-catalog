@@ -19,6 +19,23 @@
         - webui
         - webui_external
       required: true
+     
+    - variable: s3_bucket
+      label: S3 bucket
+      description: "The S3 bucket to use for storing 'pypi' packages"
+      default: cognotekt.health
+      required: true
+      type: string
+
+    - variable: aws_access_key
+      label: AWS access key
+      description: "not neccessary (hopefully) if instance has IAM role attached"
+      type: string
+
+    - variable: aws_secret_key
+      label: AWS secret key
+      description: "not neccessary (hopefully) if instance has IAM role attached"
+      type: string
 
 
 My-Py-repo:
