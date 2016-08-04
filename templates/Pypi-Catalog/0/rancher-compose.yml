@@ -23,7 +23,7 @@
     - variable: s3_bucket
       label: S3 bucket
       description: "The S3 bucket to use for storing 'pypi' packages"
-      default: cognotekt.health
+      default: cognotekt-internal-artifacts
       required: true
       type: string
 
