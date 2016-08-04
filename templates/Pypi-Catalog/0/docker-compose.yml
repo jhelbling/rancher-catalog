@@ -1,6 +1,6 @@
 My-Py-repo:
   ports:
-  - 65346:8080/tcp
+  - 8080/tcp
   environment:
     AWS_DEFAULT_REGION: eu-central-1
     AWS_ACCESS_KEY_ID: ${aws_access_key}
