@@ -1,5 +1,5 @@
 .catalog:
-  name: Pypi-Repository
+  name: pypi
   version: "1.0.0"
   description: |
     Deploys a Pypi Cloud Repository.
@@ -45,5 +45,5 @@
       type: string
 
 
-Pypi:
+pypi:
   scale: 1
