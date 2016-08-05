@@ -19,7 +19,14 @@
         - webui
         - webui_external
       required: true
-     
+    
+    - variable: aws_region
+      label: S3 region
+      description: "The S3 bucket region in aws"
+      default: eu-central-1
+      required: true
+      type: string
+ 
     - variable: s3_bucket
       label: S3 bucket
       description: "The S3 bucket to use for storing 'pypi' packages"
@@ -38,5 +45,5 @@
       type: string
 
 
-My-Py-repo:
+Pypi:
   scale: 1
