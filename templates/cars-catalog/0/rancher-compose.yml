@@ -20,9 +20,6 @@ cars:
 cars-db:
   hostname: ${database_host}
 
-cars-db:
-  hostname: ${database_host}
-
 cars-entry:
   scale: 1
   load_balancer_config:

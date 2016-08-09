@@ -16,13 +16,5 @@ cars:
   image: hub.cognotekt.int:5000/cars/java-facade:latest
   stdin_open: true
 
-cars:
-  expose:
-    - "80"
-  links:
-    - cars-db:db
-  labels:
-    io.rancher.scheduler.affinity:host_label: cars=true
-
 cars-db:
   image: rancher/external-service
