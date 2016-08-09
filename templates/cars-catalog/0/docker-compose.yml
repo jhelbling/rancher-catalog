@@ -1,15 +1,15 @@
-webapppython:
+cars:
   ports:
-  - 5000:5000/tcp
-  dns_search:
-  - localhost:5000
+  - 9000:9000/tcp
   labels:
     rancon.name: ${service_url}
     rancon.tag: ${service_type}
-    io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
     io.rancher.container.pull_image: always
     io.rancher.container.hostname_override: container_name
 
   tty: true
-  image: hub.cognotekt.int:5000/test/webapp-pruthvi:latest
+  command:
+  - mvn
+  - spring-boot:run
+  image: hub.cognotekt.int:5000/cars/java-facade:latest
   stdin_open: true
