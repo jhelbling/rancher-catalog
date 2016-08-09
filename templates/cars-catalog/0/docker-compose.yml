@@ -1,13 +1,11 @@
 cars:
   ports:
-  - 443:80/tcp
+  - 9000:9000/tcp
   labels:
-    io.rancher.loadbalancer.ssl.ports: '443'
-    io.rancher.loadbalancer.target.owncloud: '80'
-    io.rancher.scheduler.affinity:host_label: cars=true
-  image: rancher/load-balancer-service
-  links:
-    - owncloud:owncloud
+    rancon.name: ${service_url}
+    rancon.tag: ${service_type}
+    io.rancher.container.pull_image: always
+    io.rancher.container.hostname_override: container_name
 
   tty: true
   command:
@@ -16,5 +14,3 @@ cars:
   image: hub.cognotekt.int:5000/cars/java-facade:latest
   stdin_open: true
 
-cars-db:
-  image: rancher/external-service
