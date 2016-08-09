@@ -1,5 +1,5 @@
-name: test webapp
+name: cars java app
 description: |
-  deploying a webapp catalog through consul template
+  deploying cars java app
 version: "0.0.1"
 category: Infrastructure
