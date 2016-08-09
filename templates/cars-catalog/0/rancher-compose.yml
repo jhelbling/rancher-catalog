@@ -2,24 +2,35 @@
   name: cars app
   version: "0.0.1"
   description: |
-    Deploys a cars java app.
+    Creates a global set of load balancers on hosts with a certain label which
+    balance traffic into a Rancher-internal service stack
+  uuid: cars-cognotekt-0
+
   questions:
 
-    - variable: service_url
-      label: URL for service
-      description: "Do not enter the TLD, AND USE TWO DASHES INSTEAD OF A DOT!!"
+    - variable: database_host
+      label: Database host URL
+      description: Must be URL, use "db" as database host name in cars
       required: true
       type: string
 
-    - variable: service_type
-      label: Visibility
-      description: "Choose 'webui_external' for reachability from 'outside'"
-      type: enum
-      options:
-        - webui
-        - webui_external
-      required: true
-
-
 cars:
   scale: 1
+
+cars-db:
+  hostname: ${database_host}
+
+cars-db:
+  hostname: ${database_host}
+
+cars-entry:
+  scale: 1
+  load_balancer_config:
+    haproxy_config: {}
+  default_cert: com.cognotekt-services.cars
+  health_check:
+    port: 42
+    interval: 2000
+    unhealthy_threshold: 3
+    healthy_threshold: 2
+    response_timeout: 2000

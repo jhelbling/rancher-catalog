@@ -1,11 +1,13 @@
 cars:
   ports:
-  - 9000:9000/tcp
+  - 443:80/tcp
   labels:
-    rancon.name: ${service_url}
-    rancon.tag: ${service_type}
-    io.rancher.container.pull_image: always
-    io.rancher.container.hostname_override: container_name
+    io.rancher.loadbalancer.ssl.ports: '443'
+    io.rancher.loadbalancer.target.owncloud: '80'
+    io.rancher.scheduler.affinity:host_label: cars=true
+  image: rancher/load-balancer-service
+  links:
+    - owncloud:owncloud
 
   tty: true
   command:
@@ -13,3 +15,14 @@ cars:
   - spring-boot:run
   image: hub.cognotekt.int:5000/cars/java-facade:latest
   stdin_open: true
+
+cars:
+  expose:
+    - "80"
+  links:
+    - cars-db:db
+  labels:
+    io.rancher.scheduler.affinity:host_label: cars=true
+
+cars-db:
+  image: rancher/external-service
