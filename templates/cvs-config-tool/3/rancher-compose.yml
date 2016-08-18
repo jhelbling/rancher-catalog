@@ -57,6 +57,27 @@
       type: password
       required: false
 
+    - variable: cattle_url
+      label: cattle url
+      description: url for Rancher access
+      type: string
+      default: abc
+      required: true
+
+    - variable: cattle_access_key
+      label: cattle access key
+      description: access key for Rancher access
+      type: string
+      default: abc
+      required: true
+
+    - variable: cattle_secret_key
+      label: cattle secret key
+      description: secret key for Rancher access
+      type: string
+      default: abc
+      required: true 
+
 lb:
   scale: 1
   load_balancer_config:
@@ -82,7 +103,7 @@ angularfe:
       port: 9000
       interval: 10000
       unhealthy_threshold: 2
-      request_line: GET /#/Login HTTP/1.0
+      request_line: GET /health HTTP/1.0
       health_treshold: 3
       response_timeout: 2000
 
