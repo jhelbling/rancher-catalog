@@ -70,27 +70,6 @@
       type: password
       required: true
 
-    - variable: cattle_url
-      label: cattle url
-      description: url for Rancher access
-      type: string
-      default: abc
-      required: true
-
-    - variable: cattle_access_key
-      label: cattle access key
-      description: access key for Rancher access
-      type: string
-      default: abc
-      required: true
-
-    - variable: cattle_secret_key
-      label: cattle secret key
-      description: secret key for Rancher access
-      type: string
-      default: abc
-      required: true
-
 lb:
   scale: 1
   load_balancer_config:
