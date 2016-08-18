@@ -41,8 +41,8 @@ billapi:
 
 lb:
   image: rancher/load-balancer-service
-  ports:
-    - 80:7000
+  expose:
+    - "80:7000/tcp"
   links:
     - billapi:billapi
     - angularfe:angularfe
