@@ -60,7 +60,13 @@
 lb:
   scale: 1
   load_balancer_config:
-    name: lb config
+    haproxy_config: {}
+  health_check:
+    port: 42
+    interval: 5000
+    unhealthy_threshold: 3
+    healthy_threshold: 2
+    response_timeout: 2000
 
 cfgtool:
   health_check:
