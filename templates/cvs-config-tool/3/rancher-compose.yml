@@ -39,14 +39,14 @@
       required: true
 
     - variable: config_db_connection
-      label: Database connection string
+      label: config database connection string
       description: 'Format: user@host/dbname'
       default: configtoolcvs@pg.cognotekt.int/configurationdatacvs
       required: true
       type: string
 
     - variable: config_db_password
-      label: Database password
+      label: config database password
       description: Grants access to DB of ConfigTool
       type: password
       required: true
@@ -56,6 +56,19 @@
       description: Grants login for cfgtool
       type: password
       required: false
+
+    - variable: billapi_db_connection
+      label: billapi database connection string
+      description: 'Format: user@host/dbname'
+      required: true
+      type: string
+      default: tt@pp.int/tt
+
+    - variable: billapi_db_password
+      label: billapi database password
+      description: grants access to bill database
+      type: password
+      required: true
 
     - variable: cattle_url
       label: cattle url
@@ -76,7 +89,7 @@
       description: secret key for Rancher access
       type: string
       default: abc
-      required: true 
+      required: true
 
 lb:
   scale: 1
