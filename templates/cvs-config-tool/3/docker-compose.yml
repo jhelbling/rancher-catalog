@@ -42,7 +42,7 @@ billapi:
 lb:
   image: rancher/load-balancer-service
   expose:
-    - "80:7000/tcp"
+    - "80:7000"
   links:
     - billapi:billapi
     - angularfe:angularfe
@@ -50,10 +50,9 @@ lb:
   labels:
     rancon.name: ${service_url}
     rancon.tag: ${service_type}
-    # io.rancher.loadbalancer.target.cfgtool: /config=8000
     # io.rancher.loadbalancer.target.cfgtool: 80/config=8000
     # io.rancher.loadbalancer.target.billapi: 80/bills=5000
-    # io.rancher.loadbalancer.target.angularfe: 80/=9000
+    io.rancher.loadbalancer.target.angularfe: 7000/=9000
     io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
     io.rancher.container.pull_image: always
     io.rancher.container.create_agent: true
