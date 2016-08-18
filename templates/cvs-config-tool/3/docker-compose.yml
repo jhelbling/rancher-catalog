@@ -1,8 +1,8 @@
 cfgtool:
   image: ${cfgtool_image}
   ports:
-    - "8000"
-    - "8090"
+    - "8000:8000"
+    - "8090:8090"
   environment:
     DB_CONNECTION: ${config_db_connection}
     DB_PASSWORD: ${config_db_password}
@@ -41,7 +41,7 @@ billapi:
 
 lb:
   image: rancher/load-balancer-service
-  expose:
+  ports:
     - "80:7000"
   links:
     - billapi:billapi
