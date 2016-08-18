@@ -20,7 +20,7 @@ cfgtool:
 angularfe:
   image: ${angular_image}
   ports:
-    - 9000:9000
+    - "9000:9000"
   labels:
     io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
     io.rancher.container.pull_image: always
@@ -31,7 +31,7 @@ angularfe:
 billapi:
   image: ${billapi_image}
   ports:
-    - 5000:5000
+    - "5000:5000"
   environment:
     DB_CONNECTION: ${billapi_db_connection}
     DB_PASSWORD: ${billapi_db_password}
