@@ -1,5 +1,5 @@
-name: RSAS Client Web Interface
+name: CVS-configtool
 description: |
-  Creates an RSAS client to be linked with a running RSAS-CVS combo.
-version: "1.0.0"
+  creates the configtool-instance together with a bill-api
+version: "2.0.0"
 category: Cognotekt-Health
