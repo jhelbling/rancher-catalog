@@ -90,15 +90,6 @@ cfgtool:
     health_treshold: 3
     response_timeout: 2000
 
-angularfe:
-  health_check:
-    port: 9000
-    interval: 10000
-    unhealthy_threshold: 2
-    request_line: GET /health HTTP/1.0
-    health_treshold: 3
-    response_timeout: 2000
-
 billapi:
   health_check:
     port: 5000
