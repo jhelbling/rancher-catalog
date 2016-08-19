@@ -7,9 +7,6 @@ cfgtool:
     DB_CONNECTION: ${config_db_connection}
     DB_PASSWORD: ${config_db_password}
     ADMIN_PASSWORD: ${cfg_admin_password}
-    CATTLE_URL: ${cattle_url}
-    CATTLE_ACCESS_KEY: ${cattle_access_key}
-    CATTLE_SECRET_KEY: ${cattle_secret_key}
   labels:
     io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
     io.rancher.container.pull_image: always
