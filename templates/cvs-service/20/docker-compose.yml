@@ -54,7 +54,7 @@ cvs-balancer:
 cvs:
   image: ${cvs_image}
   environment:
-    CVS_CMD: "config/cvsConfig.json -r ${log_destination_host} -q ${log_destination_port}"
+    CVS_CMD: "config/cvsConfig.json"
   volumes_from:
     - cvs-config
   expose:
