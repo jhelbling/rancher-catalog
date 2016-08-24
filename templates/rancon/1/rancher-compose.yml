@@ -1,0 +1,15 @@
+.catalog:
+  name: rancon
+  version: "0.0.1"
+  description: |
+    Install Rancon in the environment. Do *not* scale up beyond a single host.
+  questions:
+
+    - variable: consul_url
+      label: URL to a consul instance
+      required: true
+      type: string
+
+
+service:
+  scale: 1

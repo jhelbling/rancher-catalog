@@ -1,0 +1,7 @@
+service:
+  image: quay.io/flypenguin/rancon
+  command: ./rancher.sh -b url=${}
+  labels:
+    # http://docs.rancher.com/rancher/v1.0/zh/rancher-services/service-accounts/
+    io.rancher.container.create_agent: true
+    io.rancher.container.agent.role: environment

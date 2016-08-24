@@ -1,0 +1,22 @@
+<svg width="400" height="400" xmlns="http://www.w3.org/2000/svg">
+ <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
+
+ <g>
+  <title>background</title>
+  <rect fill="#fff" id="canvas_background" height="402" width="402" y="-1" x="-1"/>
+  <g display="none" id="canvasGrid">
+   <rect fill="url(#gridpattern)" stroke-width="0" y="0" x="0" height="100%" width="100%" id="svg_4"/>
+  </g>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <g id="svg_6">
+   <text font-weight="bold" xml:space="preserve" text-anchor="start" font-family="'Trebuchet MS', Gadget, sans-serif" font-size="80" id="svg_1" y="129.440763" x="167.753352" stroke-width="0" stroke="#000" fill="#000000" transform="matrix(1.19482, 0, 0, 1.19482, -8.08523, -20.1643)">cher</text>
+   <text font-weight="bold" xml:space="preserve" text-anchor="start" font-family="'Trebuchet MS', Gadget, sans-serif" font-size="80" id="svg_3" y="129.440766" x="11.495782" stroke-width="0" stroke="#000" fill="#bf0000" transform="matrix(1.19482, 0, 0, 1.19482, -8.08523, -20.1643)">RAN</text>
+  </g>
+  <g id="svg_10">
+   <text font-weight="bold" xml:space="preserve" text-anchor="start" font-family="'Trebuchet MS', Gadget, sans-serif" font-size="80" id="svg_7" y="207.276754" x="199.557319" stroke-width="0" stroke="#000" fill="#000000" transform="matrix(1.19482, 0, 0, 1.19482, -8.08523, -20.1643)">sul</text>
+   <text font-weight="bold" xml:space="preserve" text-anchor="start" font-family="'Trebuchet MS', Gadget, sans-serif" font-size="80" id="svg_8" y="207.276757" x="43.299749" stroke-width="0" stroke="#000" fill="#bf0000" transform="matrix(1.19482, 0, 0, 1.19482, -8.08523, -20.1643)">CON</text>
+  </g>
+ </g>
+</svg>
