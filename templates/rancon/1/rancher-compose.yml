@@ -7,6 +7,7 @@
 
     - variable: consul_url
       label: URL to a consul instance
+      description: 'Example: https://consul:8500'
       required: true
       type: string
 
