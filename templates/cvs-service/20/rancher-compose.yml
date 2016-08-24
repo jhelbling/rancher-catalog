@@ -83,13 +83,13 @@
 
 cvs:
   scale: 4
-#  health_check:
-#    port: 8091
-#    interval: 5500
-#    unhealthy_threshold: 2
-#    request_line: GET /health HTTP/1.0
-#    healthy_threshold: 3
-#    response_timeout: 10000
+  health_check:
+    port: 8091
+    interval: 5500
+    unhealthy_threshold: 2
+    request_line: GET /health HTTP/1.0
+    healthy_threshold: 3
+    response_timeout: 10000
 
 rsas:
   scale: 2
@@ -105,9 +105,9 @@ cvs-balancer:
   scale: 2
   load_balancer_config:
     haproxy_config: {}
-#  health_check:
-#    port: 42
-#    interval: 5000
-#    unhealthy_threshold: 3
-#    healthy_threshold: 2
-#    response_timeout: 2000
+  health_check:
+    port: 42
+    interval: 5000
+    unhealthy_threshold: 3
+    healthy_threshold: 2
+    response_timeout: 2000
