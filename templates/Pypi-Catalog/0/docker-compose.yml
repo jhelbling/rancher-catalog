@@ -1,0 +1,19 @@
+pypi:
+  ports:
+   - "8080"
+  environment:
+    AWS_DEFAULT_REGION: ${aws_region}
+    AWS_ACCESS_KEY_ID: ${aws_access_key}
+    AWS_SECRET_ACCESS_KEY: ${aws_secret_key}
+    DISP_BUCKET: ${s3_bucket}
+    PORT: 
+  labels:
+    rancon.name: ${service_url}
+    rancon.tag: ${service_type}
+    io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+    io.rancher.container.pull_image: always
+    io.rancher.container.hostname_override: container_name
+
+  tty: true
+  image: hub.cognotekt.int:5000/pypi/repository
+  stdin_open: true

@@ -1,0 +1,49 @@
+.catalog:
+  name: pypi
+  version: "1.0.0"
+  description: |
+    Deploys a Pypi Cloud Repository.
+  questions:
+
+    - variable: service_url
+      label: URL for service
+      description: "Do not enter the TLD, AND USE TWO DASHES INSTEAD OF A DOT!!"
+      required: true
+      type: string
+
+    - variable: service_type
+      label: Visibility
+      description: "Choose 'webui_external' for reachability from 'outside'"
+      type: enum
+      options:
+        - webui
+        - webui_external
+      required: true
+    
+    - variable: aws_region
+      label: S3 region
+      description: "The S3 bucket region in aws"
+      default: eu-central-1
+      required: true
+      type: string
+ 
+    - variable: s3_bucket
+      label: S3 bucket
+      description: "The S3 bucket to use for storing 'pypi' packages"
+      default: cognotekt-internal-artifacts
+      required: true
+      type: string
+
+    - variable: aws_access_key
+      label: AWS access key
+      description: "not neccessary (hopefully) if instance has IAM role attached"
+      type: string
+
+    - variable: aws_secret_key
+      label: AWS secret key
+      description: "not neccessary (hopefully) if instance has IAM role attached"
+      type: string
+
+
+pypi:
+  scale: 1

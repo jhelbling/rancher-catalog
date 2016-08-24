@@ -1,0 +1,23 @@
+.catalog:
+  name: cars
+  version: "0.0.1"
+  description: |
+    deploying a java app for cars project.
+  questions:
+    - variable: service_url
+      label: URL for service
+      description: "Do not enter the TLD, AND USE TWO DASHES INSTEAD OF A DOT!!"
+      required: true
+      type: string
+
+    - variable: service_type
+      label: Visibility
+      description: "Choose 'webui_external' for reachability from 'outside'"
+      type: enum
+      options:
+        - webui
+        - webui_external
+      required: true
+
+cars:
+  scale: 1
