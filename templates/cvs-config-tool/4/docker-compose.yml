@@ -1,0 +1,59 @@
+cfgtool:
+  image: ${cfgtool_image}
+  ports:
+    - "8000"
+    - "8090"
+  links:
+    - "billapi:billapi"
+  environment:
+    DB_CONNECTION: ${config_db_connection}
+    DB_PASSWORD: ${config_db_password}
+    ADMIN_PASSWORD: ${cfg_admin_password}
+    CON_BILLAPI: billapi:5000
+    AUTH_SECRET_KEY: ${auth_secret_key}
+  labels:
+    io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+    io.rancher.container.pull_image: always
+    io.rancher.container.create_agent: true
+    io.rancher.container.agent.role: environment
+    io.rancher.container.hostname_override: container_name
+
+angularfe:
+  image: ${angular_image}
+  ports:
+    - "9000"
+  labels:
+    io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+    io.rancher.container.pull_image: always
+    io.rancher.container.hostname_override: container_name
+
+billapi:
+  image: ${billapi_image}
+  ports:
+    - "5000"
+  environment:
+    DB_CONNECTION: ${billapi_db_connection}
+    DB_PASSWORD: ${billapi_db_password}
+    AUTH_SECRET_KEY: ${auth_secret_key}
+  labels:
+    io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+    io.rancher.container.pull_image: always
+    io.rancher.container.hostname_override: container_name
+
+lb:
+  image: rancher/load-balancer-service
+  ports:
+    - "80"
+  links:
+    - "billapi:billapi"
+    - "angularfe:angularfe"
+    - "cfgtool:cfgtool"
+  labels:
+    rancon.name: ${service_url}
+    rancon.tag: ${service_type}
+    io.rancher.loadbalancer.target.angularfe: /=9000
+    io.rancher.loadbalancer.target.cfgtool: /config=8000
+    io.rancher.loadbalancer.target.billapi: /bills=5000
+    io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+    io.rancher.container.pull_image: always
+    io.rancher.container.hostname_override: container_name
