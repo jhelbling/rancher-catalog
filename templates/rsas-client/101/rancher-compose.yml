@@ -32,12 +32,12 @@
       description: "Choose RSAS service to use"
       type: "service"
 
-rsas-client:
-  scale: 1
-  health_check:
-    port: 1234
-    interval: 5500
-    unhealthy_threshold: 2
-    request_line: GET client/health HTTP/1.0
-    healthy_threshold: 3
-    response_timeout: 10000
+#rsas-client:
+#  scale: 1
+#  health_check:
+#    port: 1234
+#    interval: 5500
+#    unhealthy_threshold: 2
+#    request_line: GET client/health HTTP/1.0
+#    healthy_threshold: 3
+#    response_timeout: 10000
