@@ -91,7 +91,7 @@ cvs:
     healthy_threshold: 3
     response_timeout: 10000
 
-rsas:
+dispatcher:
   scale: 2
   health_check:
     port: 1194
