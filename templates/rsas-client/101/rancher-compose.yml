@@ -1,0 +1,43 @@
+.catalog:
+  name: rsas-client
+  version: "1.0.1"
+  description: |
+    Creates an RSAS client and links it to an RSAS instance.
+  questions:
+
+    - variable: service_url
+      label: URL for service
+      description: "Do not enter the TLD, AND USE TWO DASHES INSTEAD OF A DOT!!"
+      required: true
+      type: string
+
+    - variable: service_type
+      label: Visibility
+      description: "Choose 'webui_external' for reachability from 'outside'"
+      type: enum
+      options:
+        - webui
+        - webui_external
+      required: true
+
+    - variable: rsas_client_image
+      label: RSAS client container
+      default: hub.cognotekt.int:5000/production/rsas-client:latest
+      required: true
+      type: string
+
+    - variable: "rsas_service"
+      label: "RSAS service"
+      required: true
+      description: "Choose RSAS service to use"
+      type: "service"
+
+rsas-client:
+  scale: 1
+  health_check:
+    port: 1234
+    interval: 5500
+    unhealthy_threshold: 2
+    request_line: GET client/health HTTP/1.0
+    healthy_threshold: 3
+    response_timeout: 10000
