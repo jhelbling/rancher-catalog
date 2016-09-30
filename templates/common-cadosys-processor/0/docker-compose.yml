@@ -1,0 +1,43 @@
+processor:
+    image: hub.cognotekt.int:5000/cars/cadosys:latest
+    command:
+        - ./cadosys-processor
+    ports:
+        - "40002"
+    environment:
+        CARS_OCR_BASE_URL:          ${cadosys_ocr_base_url}
+        CARS_OCR_CALLBACK_URL:      http://${service_url}-backend.cogno.int/ocr/receive
+        CARS_OCR_CALLBACK_LOG_URL:  http://${service_url}-backend.cogno.int/log
+        AWS_ACCESS_KEY_ID:          ${aws_access_key_id}
+        AWS_SECRET_ACCESS_KEY:      ${aws_secret_access_key}
+        S3_REGION:                  ${s3_region}
+        S3_BUCKET:                  ${s3_bucket}
+        S3_KMS:                     ${s3_kms}
+        SQS_QUEUE:                  cadosys_${service_url}
+        PROCESSOR_LISTEN_PORT:      "40002"
+    labels:
+        rancon.name: ${service_url}-backend
+        rancon.tag: webui
+        io.rancher.container.pull_image: always
+        io.rancher.container.hostname_override: container_name
+
+
+facade:
+    image: hub.cognotekt.int:5000/cars/cadosys:latest
+    command:
+        - ./cadosys-facade
+    ports:
+        - "40000"
+    environment:
+        AWS_ACCESS_KEY_ID:          ${aws_access_key_id}
+        AWS_SECRET_ACCESS_KEY:      ${aws_secret_access_key}
+        S3_REGION:                  ${s3_region}
+        S3_BUCKET:                  ${s3_bucket}
+        S3_KMS:                     ${s3_kms}
+        SQS_QUEUE:                  cadosys_${service_url}
+        FACADE_LISTEN_PORT:         "40000"
+    labels:
+        rancon.name: ${service_url}
+        rancon.tag: webui
+        io.rancher.container.pull_image: always
+        io.rancher.container.hostname_override: container_name

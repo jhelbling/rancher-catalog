@@ -1,0 +1,59 @@
+.catalog:
+  name: common-cadosys-processor
+  version: "6.66"
+  description: |
+    IMPORTANT: the glass system CAN NOT BE RUN at the same time as the glass
+    system (on the cadosys site). Please see the confluence page on the
+    cars-internal space for more details.
+
+  questions:
+
+    - variable:     service_url
+      label:        URL for service
+      description:  Do not enter the TLD, AND USE TWO DASHES INSTEAD OF A DOT!!
+      required:     true
+      type:         string
+
+    - variable:     s3_bucket
+      label:        S3 bucket name
+      description:  S3 bucket name
+      default:      cognotekt.FILLMEIN
+      type:         string
+
+    - variable:     cadosys_ocr_base_url
+      label:        URL for CADOSYS service
+      description:  Glass system uses port :490, cars doesn't
+      required:     true
+      default:      "http://CHANGE_ME/api"
+      type:         string
+
+    - variable:     s3_kms
+      label:        S3 encryption master key
+      description:  ID for encryption key from AWS KMS
+      required:     true
+      type:         string
+
+    - variable:     aws_access_key_id
+      label:        AWS access key
+      description:  Leave out to use host credentials, might not work though
+      type:         string
+
+    - variable:     s3_region
+      label:        S3 bucket region
+      description:  S3 bucket region
+      default:      eu-central-1
+      required:     true
+      type:         string
+
+    - variable:     aws_secret_access_key
+      label:        AWS secret access key
+      description:  Leave out to use host credentials, might not work though
+      type:         string
+
+
+
+processor:
+  scale: 2
+
+facade:
+  scale: 2

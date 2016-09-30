@@ -1,0 +1,5 @@
+name: Common Cadosys Processing System
+description: |
+    Cadosys bill facade & processor systems
+version: "6.66"
+category: C11H Common
