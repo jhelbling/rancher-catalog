@@ -1,5 +1,5 @@
-name: CVS-configtool
+name: Health CVS Config Tool
 description: |
   creates the configtool-instance together with a bill-api
 version: "2.0.0"
-category: Cognotekt-Health
+category: C11H Health

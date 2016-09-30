@@ -1,5 +1,5 @@
-name: cars java app
+name: Cars Java Facade
 description: |
   deploying cars java app
 version: "0.0.1"
-category: Infrastructure
+category: C11H Cars

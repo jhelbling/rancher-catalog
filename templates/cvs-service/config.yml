@@ -1,6 +1,6 @@
-name: CVS-RSAS
+name: Health CVS-RSAS
 description: |
   Create a Rancher-internal CVS-RSAS service structure. Needs additional load
   balancer for receiving external traffic.
 version: "0.0.5"
-category: Cognotekt-Health
+category: C11H Health

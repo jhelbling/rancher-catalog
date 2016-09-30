@@ -1,6 +1,6 @@
-name: Kibana
+name: OPS Kibana
 description: |
   Installs a kibana instance and publishes it under a the same name in
   the load balander.
 version: "0.0.1"
-category: Cognotekt
+category: C11H Ops

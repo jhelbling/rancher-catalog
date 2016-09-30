@@ -1,5 +1,5 @@
-name: RSAS Client Web Interface
+name: Health RSAS Client
 description: |
   Creates an RSAS client to be linked with a running RSAS-CVS combo.
 version: "1.0.0"
-category: Cognotekt-Health
+category: C11H Health
