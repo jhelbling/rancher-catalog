@@ -20,7 +20,7 @@
 
     - variable: angular_image
       label: angular frontend container
-      default: hub.cognotekt.int:5000/frontend/frontend:latest
+      default: hub.cognotekt.int:5000/production/config-frontend:latest
       required: true
       type: string
 
