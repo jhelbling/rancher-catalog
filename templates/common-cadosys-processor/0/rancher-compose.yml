@@ -51,10 +51,14 @@
       type:         string
 
     - variable:     identifier
-      label:        Original filenames or UUID
-      description:  Original filenames or UUID
-      default:      original
-      type:         string
+      label:        S3 filename format
+      description:  UUID replaces the filename with a generated UUID
+      default:      UUID
+      type:         enum
+      options:
+        - original
+        - UUID 
+      required:     true
 
 
 
