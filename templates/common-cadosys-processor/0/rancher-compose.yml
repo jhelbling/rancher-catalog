@@ -50,6 +50,12 @@
       description:  Leave out to use host credentials, might not work though
       type:         string
 
+    - variable:     identifier
+      label:        Original filenames or UUID
+      description:  Original filenames or UUID
+      default:      original
+      type:         string
+
 
 
 processor:
