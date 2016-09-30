@@ -1,5 +1,0 @@
-name: Gluster FS
-description: |
-  Cognotekt GlusterFS storage volume
-version: 0.5.0
-category: Storage

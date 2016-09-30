@@ -1,5 +1,0 @@
-name: test webapp
-description: |
-  deploying a webapp catalog through consul template
-version: "0.0.1"
-category: Infrastructure

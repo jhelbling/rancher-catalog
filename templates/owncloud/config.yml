@@ -1,6 +1,0 @@
-name: Owncloud
-description: |
-  Cognotekt owncloud catalog item. v0.0.1 has it's own certificate,
-  v0.0.2-nossl is plain-text.
-version: "0.0.1"
-category: Cognotekt
