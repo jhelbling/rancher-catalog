@@ -13,10 +13,10 @@ dispatcher:
     DISP_BUCKET: ${s3_bucket}
     DISP_QUEUE: ${sqs_queue}
     DISP_API_PREFIX: ${staging_prefix}
-    CVS_HOST: cvs-balancer
-    CVS_PORT: '8090'
     REDIS_HOST: redis
     REDIS_PORT: '6379'
+    PROCESSOR_HOST: cvs-balancer
+    PROCESSOR_PORT: '1190'
   labels:
     rancon.name: ${service_url}
     rancon.tag: ${service_type}
@@ -28,7 +28,7 @@ dispatcher:
 
 statistics-component:
   ports:
-  - "1195"
+  - "1193"
   image: ${dispatcher_image}
   command: ["./STATISTICS_COMPONENT.py"]
   environment:
@@ -38,14 +38,10 @@ statistics-component:
     PROC_SERVICE_ID: ${service_url}
     PROC_BUCKET: ${s3_bucket}
     STAT_QUEUE: ${sqs_queue1}
-    REDIS_HOST: redis
-    REDIS_PORT: '6379'
   labels:
     io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
     io.rancher.container.pull_image: always
     io.rancher.container.hostname_override: container_name
-  links:
-  - "cvs-balancer:cvs-balancer"
 
 redis:
   expose:
@@ -69,6 +65,10 @@ processor:
     PROC_QUEUE1: ${sqs_queue1}
     CVS_HOST: cvs-balancer
     CVS_PORT: '8090'
+    REDIS_HOST: redis
+    REDIS_PORT: '6379'
+  expose:
+    - "1190"
   labels:
     io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
     io.rancher.container.pull_image: always
@@ -80,7 +80,7 @@ processor:
 
 cvs-balancer:
   expose:
-    - "1195:1195/tcp"
+    - "1190:1190/tcp"
   image: rancher/load-balancer-service
   links:
     - processor:processor
@@ -94,7 +94,6 @@ cvs:
     - cvs-config
   expose:
     - "8090"
-    - "8091"
   labels:
     io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
     io.rancher.container.pull_image: always

@@ -118,10 +118,10 @@
 
 
 processor:
-  scale: 4
+  scale: 2
 
 dispatcher:
-  scale: 2
+  scale: 1
   health_check:
     port: 1194
     interval: 5000
@@ -137,7 +137,7 @@ redis:
   scale: 1
 
 cvs-balancer:
-  scale: 2
+  scale: 1
   load_balancer_config:
     haproxy_config: {}
   health_check:
