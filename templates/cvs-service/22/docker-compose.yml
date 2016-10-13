@@ -16,7 +16,7 @@ dispatcher:
     CVS_HOST: cvs-balancer
     CVS_PORT: '8090'
     REDIS_HOST: redis
-    REDIS_PORT: 6379
+    REDIS_PORT: '6379'
   labels:
     rancon.name: ${service_url}
     rancon.tag: ${service_type}
@@ -27,6 +27,8 @@ dispatcher:
   - "cvs-balancer:cvs-balancer"
 
 statistics-component:
+  ports:
+  - "1195"
   image: ${dispatcher_image}
   command: ["./STATISTICS_COMPONENT.py"]
   environment:
@@ -37,7 +39,7 @@ statistics-component:
     PROC_BUCKET: ${s3_bucket}
     STAT_QUEUE: ${sqs_queue1}
     REDIS_HOST: redis
-    REDIS_PORT: 6379
+    REDIS_PORT: '6379'
   labels:
     io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
     io.rancher.container.pull_image: always
@@ -78,7 +80,7 @@ processor:
 
 cvs-balancer:
   expose:
-    - "1194:1194/tcp"
+    - "1195:1195/tcp"
   image: rancher/load-balancer-service
   links:
     - processor:processor

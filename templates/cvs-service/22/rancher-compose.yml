@@ -52,9 +52,17 @@
       required: true
       type: string
 
-    - variable: redis_image
+    - variable: dispatcher_image
       label: Dispatcher container
       description: "(formerly RSAS)"
+      default: hub.cognotekt.int:5000/production/rsas:dev-async
+      required: true
+      type: string
+
+
+    - variable: redis_image
+      label: redis container
+      description: Atomic counter for incrementing.
       default: redis
       required: true
       type: string
@@ -63,6 +71,20 @@
       label: CVS container
       description: Base container image for CVS
       default: hub.cognotekt.int:5000/production/cvs:latest
+      required: true
+      type: string
+
+    - variable: sqs_queue
+      label: CVS container
+      description: sqs queue
+      default: test_queue
+      required: true
+      type: string
+
+    - variable: sqs_queue1
+      label: CVS container
+      description: sqs queue
+      default: dev_queue
       required: true
       type: string
 
