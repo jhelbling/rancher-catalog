@@ -7,13 +7,16 @@ dispatcher:
     AWS_DEFAULT_REGION: eu-central-1
     AWS_ACCESS_KEY_ID: ${aws_access_key}
     AWS_SECRET_ACCESS_KEY: ${aws_secret_key}
-    CONSUL: consul.cognotekt.int
-    PROM_PUSHGATEWAY: consul:prom-pushgateway
+    CONSUL: con.cogno.int
+    PROM_PUSHGATEWAY: ${prometheus_pushgateway_address}
     DISP_SERVICE_ID: ${service_url}
     DISP_BUCKET: ${s3_bucket}
+    DISP_QUEUE: ${sqs_queue}
     DISP_API_PREFIX: ${staging_prefix}
     CVS_HOST: cvs-balancer
-    CVS_PORT: '8080'
+    CVS_PORT: '8090'
+    REDIS_HOST: redis
+    REDIS_PORT: 6379
   labels:
     rancon.name: ${service_url}
     rancon.tag: ${service_type}
@@ -22,6 +25,33 @@ dispatcher:
     io.rancher.container.hostname_override: container_name
   links:
   - "cvs-balancer:cvs-balancer"
+
+statistics-component:
+  image: ${dispatcher_image}
+  command: ["./STATISTICS_COMPONENT.py"]
+  environment:
+    AWS_DEFAULT_REGION: eu-central-1
+    AWS_ACCESS_KEY_ID: ${aws_access_key}
+    AWS_SECRET_ACCESS_KEY: ${aws_secret_key}
+    PROC_SERVICE_ID: ${service_url}
+    PROC_BUCKET: ${s3_bucket}
+    STAT_QUEUE: ${sqs_queue1}
+    REDIS_HOST: redis
+    REDIS_PORT: 6379
+  labels:
+    io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+    io.rancher.container.pull_image: always
+    io.rancher.container.hostname_override: container_name
+  links:
+  - "cvs-balancer:cvs-balancer"
+
+redis:
+  expose:
+    - "6379:6379/tcp"
+  image: ${redis_image}
+  labels:
+    io.rancher.container.pull_image: always
+    io.rancher.container.hostname_override: container_name
 
 
 processor:
@@ -33,37 +63,40 @@ processor:
     AWS_SECRET_ACCESS_KEY: ${aws_secret_key}
     PROC_SERVICE_ID: ${service_url}
     PROC_BUCKET: ${s3_bucket}
+    PROC_QUEUE: ${sqs_queue}
+    PROC_QUEUE1: ${sqs_queue1}
     CVS_HOST: cvs-balancer
-    CVS_PORT: '8080'
+    CVS_PORT: '8090'
   labels:
     io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
     io.rancher.container.pull_image: always
     io.rancher.container.hostname_override: container_name
+    io.rancher.sidekicks: cvs, cvs-config
   links:
   - "cvs-balancer:cvs-balancer"
 
 
 cvs-balancer:
   expose:
-    - "8080:8090/tcp"
+    - "1194:1194/tcp"
   image: rancher/load-balancer-service
   links:
-    - cvs:cvs
+    - processor:processor
 
 
 cvs:
   image: ${cvs_image}
   environment:
-    CVS_CMD: "config/cvsConfig.json -r ${log_destination_host} -q ${log_destination_port}"
+    CVS_CMD: "config/cvsConfig.json"
   volumes_from:
     - cvs-config
   expose:
     - "8090"
+    - "8091"
   labels:
     io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
     io.rancher.container.pull_image: always
     io.rancher.container.hostname_override: container_name
-    io.rancher.sidekicks: cvs-config
 
 
 cvs-config:

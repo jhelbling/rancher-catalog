@@ -48,7 +48,14 @@
     - variable: dispatcher_image
       label: Dispatcher container
       description: "(formerly RSAS)"
-      default: hub.cognotekt.int:5000/production/rsas:latest
+      default: hub.cognotekt.int:5000/production/rsas:dev-async
+      required: true
+      type: string
+
+    - variable: redis_image
+      label: Dispatcher container
+      description: "(formerly RSAS)"
+      default: redis
       required: true
       type: string
 
@@ -80,22 +87,18 @@
       required: true
       type: int
 
+    - variable: prometheus_pushgateway_address
+      label: The prometheus pushgateay address
+      description: "specify 'consul:<service-name>' for a lookup in consul, or 'dummy' if there isn't one"
+      default: consul:pushgateway
+      required: true
+      type: string
 
-<<<<<<< HEAD
-cvs:
-=======
+
 processor:
->>>>>>> aa0122b... new version of docker-compose and rancher-compose added
   scale: 4
-  health_check:
-    port: 8091
-    interval: 5500
-    unhealthy_threshold: 2
-    request_line: GET /health HTTP/1.0
-    healthy_threshold: 3
-    response_timeout: 10000
 
-rsas:
+dispatcher:
   scale: 2
   health_check:
     port: 1194
@@ -105,11 +108,13 @@ rsas:
     healthy_threshold: 3
     response_timeout: 5000
 
-<<<<<<< HEAD
+statistics-component:
+  scale: 1
+
+redis:
+  scale: 1
+
 cvs-balancer:
-=======
-processor-balancer:
->>>>>>> aa0122b... new version of docker-compose and rancher-compose added
   scale: 2
   load_balancer_config:
     haproxy_config: {}
@@ -119,3 +124,4 @@ processor-balancer:
     unhealthy_threshold: 3
     healthy_threshold: 2
     response_timeout: 2000
+
