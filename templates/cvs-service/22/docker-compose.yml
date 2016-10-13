@@ -1,0 +1,75 @@
+dispatcher:
+  image: ${dispatcher_image}
+  ports:
+  - "1194"
+  command: ["./DISPATCHER.py"]
+  environment:
+    AWS_DEFAULT_REGION: eu-central-1
+    AWS_ACCESS_KEY_ID: ${aws_access_key}
+    AWS_SECRET_ACCESS_KEY: ${aws_secret_key}
+    CONSUL: consul.cognotekt.int
+    PROM_PUSHGATEWAY: consul:prom-pushgateway
+    DISP_SERVICE_ID: ${service_url}
+    DISP_BUCKET: ${s3_bucket}
+    DISP_API_PREFIX: ${staging_prefix}
+    CVS_HOST: cvs-balancer
+    CVS_PORT: '8080'
+  labels:
+    rancon.name: ${service_url}
+    rancon.tag: ${service_type}
+    io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+    io.rancher.container.pull_image: always
+    io.rancher.container.hostname_override: container_name
+  links:
+  - "cvs-balancer:cvs-balancer"
+
+
+processor:
+  image: ${dispatcher_image}
+  command: ["./PROCESSOR.py"]
+  environment:
+    AWS_DEFAULT_REGION: eu-central-1
+    AWS_ACCESS_KEY_ID: ${aws_access_key}
+    AWS_SECRET_ACCESS_KEY: ${aws_secret_key}
+    PROC_SERVICE_ID: ${service_url}
+    PROC_BUCKET: ${s3_bucket}
+    CVS_HOST: cvs-balancer
+    CVS_PORT: '8080'
+  labels:
+    io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+    io.rancher.container.pull_image: always
+    io.rancher.container.hostname_override: container_name
+  links:
+  - "cvs-balancer:cvs-balancer"
+
+
+cvs-balancer:
+  expose:
+    - "8080:8090/tcp"
+  image: rancher/load-balancer-service
+  links:
+    - cvs:cvs
+
+
+cvs:
+  image: ${cvs_image}
+  environment:
+    CVS_CMD: "config/cvsConfig.json -r ${log_destination_host} -q ${log_destination_port}"
+  volumes_from:
+    - cvs-config
+  expose:
+    - "8090"
+  labels:
+    io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+    io.rancher.container.pull_image: always
+    io.rancher.container.hostname_override: container_name
+    io.rancher.sidekicks: cvs-config
+
+
+cvs-config:
+  image: ${cvs_config_image}
+  net: "none"
+  labels:
+    io.rancher.container.start_once: "true"
+    io.rancher.container.pull_image: always
+
