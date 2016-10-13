@@ -1,0 +1,15 @@
+rsas-client:
+  image: ${carsResale_crawler_image}
+  ports:
+    - "5000"
+  environment:
+    SCRAPY_API_KEY: ${SCRAPY_API_KEY}
+    AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+    AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+    DEBUG: false
+  labels:
+    rancon.name: ${service_url}
+    rancon.tag: ${service_type}
+    io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+    io.rancher.container.pull_image: always
+    io.rancher.container.hostname_override: container_name

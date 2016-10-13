@@ -1,0 +1,42 @@
+.catalog:
+  name: carsResale-crawler
+  version: "0.0.0"
+  description: |
+   TOWRITE 
+  questions:
+
+    - variable: SCRAPY_API_KEY
+      label: scrapy_key_here
+      description: "TOWRITE"
+      required: true
+
+    - variable: AWS_ACCESS_KEY_ID
+      label: aws_access_key_here
+      description: "TOWRITE"
+      required: true
+
+    - variable: AWS_SECRET_ACCESS_KEY
+      label: aws_secret_access_key_here
+      description: "TOWRITE"
+      required: true
+
+    - variable: carsResale_crawler_image
+      label: RSAS client container
+      default: hub.cognotekt.int:5000/nomotekt/carsresale:latest
+      required: true
+      type: string
+
+    - variable: service_url
+      label: URL for service
+      description: "Do not enter the TLD, AND USE TWO DASHES INSTEAD OF A DOT!!"
+      required: true
+      type: string
+
+    - variable: service_type
+      label: Visibility
+      description: "Choose 'webui_external' for reachability from 'outside'"
+      type: enum
+      options:
+        - webui
+        - webui_external
+      required: true
