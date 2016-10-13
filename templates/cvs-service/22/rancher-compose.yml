@@ -52,14 +52,6 @@
       required: true
       type: string
 
-    - variable: dispatcher_image
-      label: Dispatcher container
-      description: "(formerly RSAS)"
-      default: hub.cognotekt.int:5000/production/rsas:dev-async
-      required: true
-      type: string
-
-
     - variable: redis_image
       label: redis container
       description: Atomic counter for incrementing.

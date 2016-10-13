@@ -27,9 +27,9 @@ dispatcher:
   - "cvs-balancer:cvs-balancer"
 
 statistics-component:
+  image: ${dispatcher_image}
   ports:
   - "1193"
-  image: ${dispatcher_image}
   command: ["./STATISTICS_COMPONENT.py"]
   environment:
     AWS_DEFAULT_REGION: eu-central-1
