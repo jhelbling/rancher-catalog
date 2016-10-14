@@ -1,11 +1,11 @@
-rsas-client:
+carsresale-crawler:
   image: ${carsresale_crawler_image}
   ports:
     - "5000"
   environment:
-    SCRAPY_API_KEY: ${SCRAPY_API_KEY}
-    AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
-    AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+    SCRAPY_API_KEY: ${scrapy_api_key}
+    AWS_ACCESS_KEY_ID: ${aws_acces_key_id}
+    AWS_SECRET_ACCESS_KEY: ${aws_secret_access_key}
     DEBUG: false
   labels:
     rancon.name: ${service_url}

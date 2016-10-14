@@ -2,22 +2,22 @@
   name: carsresale-crawler
   version: "0.0.0"
   description: |
-   The initial version of the webcrawler. Only the current offerings are tracked via a webcrawler.
+    Track the current resale offerings of cars.
   questions:
 
-    - variable: SCRAPY_API_KEY
+    - variable: scrapy_api_key
       label: API key of scrapinghub
       description: "The API-Key of scrapinghub"
       required: true
       type: string
 
-    - variable: AWS_ACCESS_KEY_ID
+    - variable: aws_acces_key_id
       label: Access key of the AWS
       description: "The access key of the AWS"
       required: true
       type: string
 
-    - variable: AWS_SECRET_ACCESS_KEY
+    - variable: aws_secret_access_key
       label: Secret access key of the AWS
       description: "The secret access key of the AWS"
       required: true
