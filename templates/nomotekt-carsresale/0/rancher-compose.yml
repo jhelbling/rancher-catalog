@@ -1,26 +1,28 @@
 .catalog:
-  name: carsResale-crawler
+  name: carsresale-crawler
   version: "0.0.0"
   description: |
-   TOWRITE 
+   The initial version of the webcrawler.
+
+   Only the current offerings are tracked via a webcrawler. All the crawling is done via an external service.
   questions:
 
     - variable: SCRAPY_API_KEY
       label: scrapy_key_here
-      description: "TOWRITE"
+      description: "The API-Key of scrapinghub"
       required: true
 
     - variable: AWS_ACCESS_KEY_ID
       label: aws_access_key_here
-      description: "TOWRITE"
+      description: "The access key of the AWS"
       required: true
 
     - variable: AWS_SECRET_ACCESS_KEY
       label: aws_secret_access_key_here
-      description: "TOWRITE"
+      description: "The secret access key of the AWS"
       required: true
 
-    - variable: carsResale_crawler_image
+    - variable: carsresale_crawler_image
       label: RSAS client container
       default: hub.cognotekt.int:5000/nomotekt/carsresale:latest
       required: true

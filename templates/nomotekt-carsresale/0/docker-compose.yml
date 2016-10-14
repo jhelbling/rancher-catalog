@@ -1,5 +1,5 @@
 rsas-client:
-  image: ${carsResale_crawler_image}
+  image: ${carsresale_crawler_image}
   ports:
     - "5000"
   environment:
