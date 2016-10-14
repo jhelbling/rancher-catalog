@@ -9,16 +9,19 @@
       label: API key of scrapinghub
       description: "The API-Key of scrapinghub"
       required: true
+      type: string
 
     - variable: AWS_ACCESS_KEY_ID
       label: Access key of the AWS
       description: "The access key of the AWS"
       required: true
+      type: string
 
     - variable: AWS_SECRET_ACCESS_KEY
       label: Secret access key of the AWS
       description: "The secret access key of the AWS"
       required: true
+      type: string
 
     - variable: carsresale_crawler_image
       label: container of the carsresale crawler
