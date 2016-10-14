@@ -33,7 +33,7 @@ statistics-component:
     AWS_DEFAULT_REGION: eu-central-1
     AWS_ACCESS_KEY_ID: ${aws_access_key}
     AWS_SECRET_ACCESS_KEY: ${aws_secret_key}
-    PROC_BUCKET: ${s3_bucket}
+    STAT_BUCKET: ${s3_bucket}
     STAT_QUEUE: ${sqs_queue1}
   labels:
     io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
