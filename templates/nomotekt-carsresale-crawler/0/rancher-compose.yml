@@ -2,28 +2,26 @@
   name: carsresale-crawler
   version: "0.0.0"
   description: |
-   The initial version of the webcrawler.
-
-   Only the current offerings are tracked via a webcrawler. All the crawling is done via an external service.
+   The initial version of the webcrawler. Only the current offerings are tracked via a webcrawler.
   questions:
 
     - variable: SCRAPY_API_KEY
-      label: scrapy_key_here
+      label: API key of scrapinghub
       description: "The API-Key of scrapinghub"
       required: true
 
     - variable: AWS_ACCESS_KEY_ID
-      label: aws_access_key_here
+      label: Access key of the AWS
       description: "The access key of the AWS"
       required: true
 
     - variable: AWS_SECRET_ACCESS_KEY
-      label: aws_secret_access_key_here
+      label: Secret access key of the AWS
       description: "The secret access key of the AWS"
       required: true
 
     - variable: carsresale_crawler_image
-      label: RSAS client container
+      label: container of the carsresale crawler
       default: hub.cognotekt.int:5000/nomotekt/carsresale:latest
       required: true
       type: string
