@@ -1,7 +1,7 @@
 carsresale-crawler:
   image: ${carsresale_crawler_image}
   ports:
-    - "5000"
+    - 5000:5000
   environment:
     SCRAPY_API_KEY: ${scrapy_api_key}
     AWS_ACCESS_KEY_ID: ${aws_acces_key_id}
