@@ -44,12 +44,12 @@
         - webui_external
       required: true
       
-carsresale-crawler:
-  scale: 1
-  health_check:
-    port: 5000
-    interval: 5500
-    unhealthy_threshold: 2
-    request_line: GET /health HTTP/1.0
-    healthy_threshold: 3
-    response_timeout: 10000
+#carsresale-crawler:
+#  scale: 1
+#  health_check:
+#    port: 5000
+#    interval: 5500
+#    unhealthy_threshold: 2
+#    request_line: GET /health HTTP/1.0
+#    healthy_threshold: 3
+#    response_timeout: 10000
